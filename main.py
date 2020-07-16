@@ -38,7 +38,7 @@ def main():
             vra_element = browser.find_elements(By.CSS_SELECTOR, '.staking-block .staking-block-value')[2].text
             # Parse VRA from string to int
             vra_number = int(vra_element.replace(' VRA', ''))
-            print(f'VRA actual staking status {vra_number}')
+            print(f'VRA actual staking number {vra_number}')
             if first_run is None:
                 print(f'First run')
                 first_run = False
@@ -46,7 +46,7 @@ def main():
                 print(f'VRA default value is {vra_default_value}')
             # is available for stake ( greater than 0 or different to previous value )
             available_for_stake = (vra_number > 0 and vra_number != vra_default_value)
-            print('VRA Staking is available:' 'Yes' if available_for_stake else 'No')
+            print('VRA Staking is available' if available_for_stake else 'VRA Staking is Unavailable')
             if available_for_stake:
                 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
                 server.ehlo()
