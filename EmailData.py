@@ -18,7 +18,7 @@ class EmailData:
         self.body = f'Veracity Value has changed from ${vra_default_value} to ${vra_number}'
 
     def set_mail_text(self, body):
-        self.email_text = """\
+        self.text = """\
     From: %s
     To: %s
     Subject: %s
