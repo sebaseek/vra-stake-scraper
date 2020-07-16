@@ -44,8 +44,7 @@ def main():
                 vra_default_value = vra_number
                 print(f'VRA default value is ${vra_default_value}')
             # is available for stake ( greater than 0 or different to previous value )
-            # available_for_stake = (vra_number > 0 and vra_number != vra_default_value)
-            available_for_stake = True
+            available_for_stake = (vra_number > 0 and vra_number != vra_default_value)
             print(f'Is VRA available for stake or has changed ${available_for_stake}')
             if available_for_stake:
                 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
