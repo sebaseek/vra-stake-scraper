@@ -2,11 +2,16 @@ import time
 import smtplib
 import logging
 from selenium import webdriver
+from dotenv import load_dotenv
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from dotenv import load_dotenv
+
+# add headless mode
+chrome_options = Options()
+chrome_options.add_argument("--headless")
 
 from EmailData import EmailData
 
@@ -19,7 +24,7 @@ VERA_WALLET_STAKING_URL = 'https://verawallet.tv/stake-vra'
 def main():
     global first_run
     vra_default_value = 0
-    browser = webdriver.Chrome('./chromedriver')
+    browser = webdriver.Chrome('./chromedriver', options=chrome_options)
     browser.get(VERA_WALLET_STAKING_URL)
     timeout = 5
     while True:
@@ -56,6 +61,9 @@ def main():
                 server.sendmail(email_data.gmail_user, email_data.to, email_data.text)
                 server.close()
                 print('Email Sent Correctly!')
+                # after send email wait 30m to avoid email spam
+                time.sleep(1800)
+
         except Exception as e:
             logging.exception(e)
         except TimeoutException:
